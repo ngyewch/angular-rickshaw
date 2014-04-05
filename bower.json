@@ -1,0 +1,23 @@
+{
+  "name": "angular-rickshaw",
+  "version": "0.1.0",
+  "authors": [
+    "Nick Ng <ngyewch@gmail.com>"
+  ],
+  "description": "AngularJS Rickshaw directive",
+  "keywords": ["angular", "angularjs", "rickshaw", "graph", "chart"],
+  "license": "Apache-2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.0",
+    "rickshaw": "~1.4.6",
+    "d3": "~3.4.3"
+  },
+  "devDependencies": {}
+}
