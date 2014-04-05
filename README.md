@@ -9,7 +9,7 @@ An AngularJS directive for [Rickshaw](http://code.shutterstock.com/rickshaw/).
 Requirements
 ============
 
-Include the Rickshaw (CSS, JS), D3 (JS) and the Angular Rickshaw (JS) in your `<head>` section:
+Include Rickshaw (CSS, JS), D3 (JS) and the Angular Rickshaw (JS) in your `<head>` section:
 ```html
 <link rel="stylesheet" href="PATH_TO_CSS/rickshaw/rickshaw.min.css">
 
