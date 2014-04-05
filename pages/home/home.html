@@ -1,0 +1,275 @@
+<div ng-controller='HomeCtrl'>
+    <h1>angular-rickshaw</h1>
+
+    <p>An AngularJS directive for <a href="http://code.shutterstock.com/rickshaw/">Rickshaw</a>.</p>
+
+    <h2>Requirements</h2>
+
+    <p>Include the Rickshaw (CSS, JS) and the Angular Rickshaw (JS) in your <code>&lt;head&gt;</code> section:</p>
+    <pre>
+        &lt;link rel=&quot;stylesheet&quot; href=&quot;PATH_TO_CSS/rickshaw/rickshaw.min.css&quot;&gt;
+
+        &lt;script src=&quot;PATH_TO_JS/rickshaw/rickshaw.js&quot;&gt;&lt;/script&gt;
+        &lt;script src=&quot;PATH_TO_JS/angular-rickshaw/rickshaw.js&quot;&gt;&lt;/script&gt;
+    </pre>
+    <p>
+
+    <h2>Usage</h2>
+
+    <p>Create a div with the <code>rickshaw</code> attribute or a <code>rickshaw</code> element to instantiate a Rickshaw graph.</p>
+    <pre>
+        &lt;rickshaw
+            rickshaw-options=&quot;options&quot;
+            rickshaw-features=&quot;features&quot;
+            rickshaw-series=&quot;series&quot;&gt;
+        &lt;/rickshaw&gt;
+    </pre>
+
+    <p>
+        The <code>rickshaw-options</code> attribute provides access to Rickshaw configuration.
+        The <code>rickshaw-features</code> attribute provides access to Rickshaw features.
+        The <code>rickshaw-series</code> attribute provides access to Rickshaw series data.
+    </p>
+
+    <h2>Examples</h2>
+
+    <h3>Basic</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Basic Rickshaw graph</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options1" rickshaw-series="series1"></rickshaw>
+        </div>
+    </div>
+
+    <tabset>
+        <tab heading="Javascript">
+            <pre>
+                $scope.options1 = {
+                    renderer: 'area'
+                };
+                $scope.series1 = [{
+                        name: 'Series 1',
+                        color: 'steelblue',
+                        data: [{x: 0, y: 23}, {x: 1, y: 15}, {x: 2, y: 79}, {x: 3, y: 31}, {x: 4, y: 60}]
+                    }, {
+                        name: 'Series 2',
+                        color: 'lightblue',
+                        data: [{x: 0, y: 30}, {x: 1, y: 20}, {x: 2, y: 64}, {x: 3, y: 50}, {x: 4, y: 15}]
+                    }];
+            </pre>
+        </tab>
+    </tabset>
+
+    <h3>Hover detail</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Rickshaw graph with hover detail</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options2" rickshaw-features="features2" rickshaw-series="series2"></rickshaw>
+        </div>
+    </div>
+
+    <tabset>
+        <tab heading="Javascript">
+            <pre>
+                $scope.options2 = {
+                    renderer: 'line'
+                };
+                $scope.features2 = {
+                    hover: {
+                        xFormatter: function(x) {
+                            return 't=' + x;
+                        },
+                        yFormatter: function(y) {
+                            return '$' + y;
+                        }
+                    }
+                };
+                $scope.series2 = [{
+                        name: 'Series 1',
+                        color: 'steelblue',
+                        data: [{x: 0, y: 23}, {x: 1, y: 15}, {x: 2, y: 79}, {x: 3, y: 31}, {x: 4, y: 60}]
+                    }, {
+                        name: 'Series 2',
+                        color: 'lightblue',
+                        data: [{x: 0, y: 30}, {x: 1, y: 20}, {x: 2, y: 64}, {x: 3, y: 50}, {x: 4, y: 15}]
+                    }];
+            </pre>
+        </tab>
+    </tabset>
+
+    <h3>Palette</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Rickshaw graph with pre-defined palette</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options3" rickshaw-features="features3" rickshaw-series="series3"></rickshaw>
+        </div>
+    </div>
+
+    <h4>Palettes</h4>
+    <ul>
+        <li><code>spectrum14</code></li>
+        <li><code>spectrum2000</code></li>
+        <li><code>spectrum2001</code></li>
+        <li><code>classic9</code></li>
+        <li><code>colorwheel</code></li>
+        <li><code>cool</code></li>
+        <li><code>munin</code></li>
+    </ul>
+
+    <tabset>
+        <tab heading="Javascript">
+            <pre>
+                $scope.options3 = {
+                    renderer: 'bar'
+                };
+                $scope.features3 = {
+                    palette: 'colorwheel'
+                };
+                $scope.series3 = [{
+                        name: 'Series 1',
+                        data: [{x: 0, y: 23}, {x: 1, y: 15}, {x: 2, y: 79}, {x: 3, y: 31}, {x: 4, y: 60}]
+                    }, {
+                        name: 'Series 2',
+                        data: [{x: 0, y: 30}, {x: 1, y: 20}, {x: 2, y: 64}, {x: 3, y: 50}, {x: 4, y: 15}]
+                    }];
+            </pre>
+        </tab>
+    </tabset>
+
+    <h3>X axis</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Rickshaw graph with X axis</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options4" rickshaw-features="features4" rickshaw-series="series4"></rickshaw>
+        </div>
+    </div>
+
+    <h4>Time units</h4>
+    <ul>
+        <li><code>decade</code></li>
+        <li><code>year</code></li>
+        <li><code>month</code></li>
+        <li><code>week</code></li>
+        <li><code>day</code></li>
+        <li><code>6 hour</code></li>
+        <li><code>hour</code></li>
+        <li><code>15 minute</code></li>
+        <li><code>minute</code></li>
+        <li><code>15 second</code></li>
+        <li><code>second</code></li>
+        <li><code>decisecond</code></li>
+        <li><code>centisecond</code></li>
+    </ul>
+
+    <tabset>
+        <tab heading="Javascript">
+            <pre>
+                $scope.options4 = {
+                    renderer: 'bar'
+                };
+                $scope.features4 = {
+                    palette: 'colorwheel',
+                    xAxis: {
+                    }
+                };
+                $scope.series4 = [{
+                        name: 'Series 1',
+                        data: [{x: 0, y: 230}, {x: 1, y: 1500}, {x: 2, y: 790}, {x: 3, y: 310}, {x: 4, y: 600}]
+                    }, {
+                        name: 'Series 2',
+                        data: [{x: 0, y: 300}, {x: 1, y: 2000}, {x: 2, y: 640}, {x: 3, y: 500}, {x: 4, y: 150}]
+                    }];
+            </pre>
+        </tab>
+    </tabset>
+
+    <h3>Y axis</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Rickshaw graph with Y axis</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options5" rickshaw-features="features5" rickshaw-series="series5"></rickshaw>
+        </div>
+    </div>
+
+    <h4>Tick formats</h4>
+    <ul>
+        <li><code>formatKMBT</code></li>
+        <li><code>formatBase1024KMGTP</code></li>
+    </ul>
+
+    <tabset>
+        <tab heading="Javascript">
+            <pre>
+                $scope.options5 = {
+                    renderer: 'bar'
+                };
+                $scope.features5 = {
+                    palette: 'colorwheel',
+                    yAxis: {
+                        tickFormat: 'formatKMBT'
+                    }
+                };
+                $scope.series5 = [{
+                        name: 'Series 1',
+                        data: [{x: 0, y: 230}, {x: 1, y: 1500}, {x: 2, y: 790}, {x: 3, y: 310}, {x: 4, y: 600}]
+                    }, {
+                        name: 'Series 2',
+                        data: [{x: 0, y: 300}, {x: 1, y: 2000}, {x: 2, y: 640}, {x: 3, y: 500}, {x: 4, y: 150}]
+                    }];
+            </pre>
+        </tab>
+    </tabset>
+
+    <h3>Legend</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Rickshaw graph with legend</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options6" rickshaw-features="features6" rickshaw-series="series6"></rickshaw>
+        </div>
+    </div>
+
+    <tabset>
+        <tab heading="Javascript">
+            <pre>
+                $scope.options6 = {
+                    renderer: 'line'
+                };
+                $scope.features6 = {
+                    palette: 'colorwheel',
+                    legend: {
+                        toggle: true,
+                        highlight: true
+                    }
+                };
+                $scope.series6 = [{
+                        name: 'Series 1',
+                        data: [{x: 0, y: 230}, {x: 1, y: 1500}, {x: 2, y: 790}, {x: 3, y: 310}, {x: 4, y: 600}]
+                    }, {
+                        name: 'Series 2',
+                        data: [{x: 0, y: 300}, {x: 1, y: 2000}, {x: 2, y: 640}, {x: 3, y: 500}, {x: 4, y: 150}]
+                    }];
+            </pre>
+        </tab>
+    </tabset>
+
+    <h3>Demo</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Demo Rickshaw graph</div>
+        <div class="panel-body">
+            <rickshaw rickshaw-options="options0" rickshaw-features="features0" rickshaw-series="series0"></rickshaw>
+            <form class="form-inline">
+                <select class="form-control" ng-model="renderer0" ng-options="renderer.name for renderer in renderers" ng-change="rendererChanged(0)"></select>
+                <select class="form-control" ng-model="palette0" ng-options="palette for palette in palettes" ng-change="paletteChanged(0)"></select>
+                <button class="btn btn-primary" ng-click="changeSeriesData(0)">Change series data</button>
+            </form>
+        </div>
+    </div>
+
+</div>
