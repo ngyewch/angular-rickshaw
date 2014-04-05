@@ -3,6 +3,9 @@ angular-rickshaw
 
 An AngularJS directive for [Rickshaw](http://code.shutterstock.com/rickshaw/).
 
+[Documentation / Demo](http://ngyewch.github.io/angular-rickshaw/).
+
+
 Requirements
 ============
 
