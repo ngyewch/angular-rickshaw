@@ -59,6 +59,7 @@ angular.module('angular-rickshaw', [])
                             };
                             hoverConfig.xFormatter = scope.features.hover.xFormatter;
                             hoverConfig.yFormatter = scope.features.hover.yFormatter;
+                            hoverConfig.formatter = scope.features.hover.formatter;
                             var hoverDetail = new Rickshaw.Graph.HoverDetail(hoverConfig);
                         }
                         if (scope.features && scope.features.palette) {
