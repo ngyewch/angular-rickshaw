@@ -6,16 +6,23 @@ An AngularJS directive for [Rickshaw](http://code.shutterstock.com/rickshaw/).
 [Documentation / Demo](http://ngyewch.github.io/angular-rickshaw/).
 
 
+Installation
+============
+
+```sh
+bower install angular-rickshaw --save
+```
+
 Requirements
 ============
 
 Include Rickshaw (CSS, JS), D3 (JS) and the Angular Rickshaw (JS) in your `<head>` section:
 ```html
-<link rel="stylesheet" href="PATH_TO_CSS/rickshaw/rickshaw.min.css">
+<link rel="stylesheet" href="bower_components/rickshaw/rickshaw.min.css">
 
-<script src="PATH_TO_JS/d3/d3.min.js"></script>
-<script src="PATH_TO_JS/rickshaw/rickshaw.min.js"></script>
-<script src="PATH_TO_JS/angular-rickshaw/rickshaw.min.js"></script>
+<script src="bower_components/d3/d3.min.js"></script>
+<script src="bower_components/rickshaw/rickshaw.min.js"></script>
+<script src="bower_components/angular-rickshaw/rickshaw.min.js"></script>
 ```
 
 Usage
