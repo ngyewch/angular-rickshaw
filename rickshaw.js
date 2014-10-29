@@ -124,7 +124,7 @@ angular.module('angular-rickshaw', [])
                     });
                     scope.$watch(function() {
                         return scope.series[0].data;
-                    }, function(newValue, oldValue){
+                    }, function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
                             update();
                         }
