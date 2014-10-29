@@ -122,13 +122,17 @@ angular.module('angular-rickshaw', [])
                             update();
                         }
                     });
-                    scope.$watch(function() {
-                        return scope.series[0].data;
+                    scope.$watch(function(scope) {
+					    var watches = {};
+						for (var i = 0; i < scope.series.length; i++) {
+						    watches['series' + i] = scope.series[i].data;
+						}
+                        return watches;
                     }, function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
                             update();
                         }
-                    });
+                    }, true);
                     scope.$watch('features', function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
                             update();
