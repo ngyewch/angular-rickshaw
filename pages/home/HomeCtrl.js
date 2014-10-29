@@ -50,8 +50,9 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
                     series.data.push({x: j, y: Math.random() * 20});
                 }
                 seriesList.push(series);
+				$scope['series' + id][i] = series;
             }
-            $scope['series' + id] = seriesList;
+            //$scope['series' + id] = seriesList;
         };
 
         $scope.options1 = {
@@ -154,6 +155,8 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
                 name: 'Series 2',
                 data: [{x: 0, y: 300}, {x: 1, y: 2000}, {x: 2, y: 640}, {x: 3, y: 500}, {x: 4, y: 150}]
             }];
+
+		$scope.series0 = [];
 
         $scope.renderer0 = $scope.renderers[0];
         $scope.palette0 = $scope.palettes[0];

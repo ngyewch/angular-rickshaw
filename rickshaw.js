@@ -59,6 +59,7 @@ angular.module('angular-rickshaw', [])
                             };
                             hoverConfig.xFormatter = scope.features.hover.xFormatter;
                             hoverConfig.yFormatter = scope.features.hover.yFormatter;
+                            hoverConfig.formatter = scope.features.hover.formatter;
                             var hoverDetail = new Rickshaw.Graph.HoverDetail(hoverConfig);
                         }
                         if (scope.features && scope.features.palette) {
@@ -121,11 +122,17 @@ angular.module('angular-rickshaw', [])
                             update();
                         }
                     });
-                    scope.$watch('series', function(newValue, oldValue) {
+                    scope.$watch(function(scope) {
+					    var watches = {};
+						for (var i = 0; i < scope.series.length; i++) {
+						    watches['series' + i] = scope.series[i].data;
+						}
+                        return watches;
+                    }, function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
                             update();
                         }
-                    });
+                    }, true);
                     scope.$watch('features', function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
                             update();
