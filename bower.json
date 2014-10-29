@@ -1,6 +1,6 @@
 {
   "name": "angular-rickshaw",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "main": "rickshaw.js",
   "authors": [
     "Nick Ng <ngyewch@gmail.com>"
