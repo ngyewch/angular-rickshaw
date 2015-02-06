@@ -17,12 +17,11 @@ angular.module('myApp', [
                  */
                 $locationProvider.html5Mode(false);		//can't use this with github pages / if don't have access to the server
 
-                // var staticPath ='/';
                 var staticPath;
-                // staticPath ='/angular-directives/angular-rickshaw/';		//local
-                staticPath = '/';		//nodejs (local)
-                staticPath = '';		//nodejs (local)
-                staticPath ='/angular-rickshaw/';		//gh-pages
+                //staticPath = '/personal/angular-rickshaw/';		//local
+                //staticPath = '/';		//nodejs (local)
+                //staticPath = '';		//nodejs (local)
+                staticPath = '/angular-rickshaw/';		//gh-pages
                 var appPathRoute = '/';
                 var pagesPath = staticPath + 'pages/';
 

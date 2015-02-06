@@ -172,18 +172,19 @@
                 $scope.options4 = {
                     renderer: 'bar'
                 };
-                $scope.features4 = {
-                    palette: 'colorwheel',
-                    xAxis: {
-                    }
-                };
-                $scope.series4 = [{
-                        name: 'Series 1',
-                        data: [{x: 0, y: 230}, {x: 1, y: 1500}, {x: 2, y: 790}, {x: 3, y: 310}, {x: 4, y: 600}]
-                    }, {
-                        name: 'Series 2',
-                        data: [{x: 0, y: 300}, {x: 1, y: 2000}, {x: 2, y: 640}, {x: 3, y: 500}, {x: 4, y: 150}]
-                    }];
+				$scope.features4 = {
+					palette: 'colorwheel',
+					xAxis: {
+						timeUnit: 'hour'
+					}
+				};
+				$scope.series4 = [{
+						name: 'Series 1',
+						data: [{x: 0 * 60, y: 230}, {x: 30 * 60, y: 1500}, {x: 60 * 60, y: 790}, {x: 90 * 60, y: 310}, {x: 120 * 60, y: 600}]
+					}, {
+						name: 'Series 2',
+						data: [{x: 0 * 60, y: 300}, {x: 30 * 60, y: 2000}, {x: 60 * 60, y: 640}, {x: 90 * 60, y: 500}, {x: 120 * 60, y: 150}]
+					}];
             </pre>
         </tab>
     </tabset>
