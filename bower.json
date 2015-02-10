@@ -1,6 +1,6 @@
 {
   "name": "angular-rickshaw",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "main": "rickshaw.js",
   "authors": [
     "Nick Ng <ngyewch@gmail.com>"
@@ -17,8 +17,8 @@
   ],
   "dependencies": {
     "angular": "~1.2.0",
-    "rickshaw": "~1.4.6",
-    "d3": "~3.4.3"
+    "rickshaw": "~1.5.1",
+    "d3": "~3.5.4"
   },
   "devDependencies": {}
 }
