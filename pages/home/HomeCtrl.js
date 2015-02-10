@@ -152,18 +152,21 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         $scope.series6 = [{
                 name: 'Series 1',
                 data: [{x: 0, y: 230}, {x: 1, y: 1500}, {x: 2, y: 790}, {x: 3, y: 310}, {x: 4, y: 600}]
-            }, {
+            },
+			{
                 name: 'Series 2',
                 data: [{x: 0, y: 300}, {x: 1, y: 2000}, {x: 2, y: 640}, {x: 3, y: 500}, {x: 4, y: 150}]
             }];
 
 		$scope.series0 = [];
 
+		$scope.options0 = {
+			renderer: 'area'
+		};
         $scope.renderer0 = $scope.renderers[0];
         $scope.palette0 = $scope.palettes[0];
 
         $scope.rendererChanged(0);
         $scope.paletteChanged(0);
         $scope.changeSeriesData(0);
-
     }]);

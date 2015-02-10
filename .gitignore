@@ -8,13 +8,35 @@
 *.gz
 .idea/*
 *.DS_Store
-lib-cov
-pids
-logs
-results
+lib-cov/
+pids/
+logs/
+results/
 
-node_modules
+node_modules/
 
 #Actually, need to track these for site to run on Github Pages..
-#bower_components
+#bower_components/
 /nbproject/private/
+
+bower_components/*/.bower.json
+bower_components/*/.gitignore
+bower_components/*/.jshintignore
+bower_components/*/.jshintrc
+bower_components/*/.rock.yml
+bower_components/*/CONTRIBUTING.md
+bower_components/*/Gruntfile.js
+bower_components/*/Makefile
+bower_components/*/README.md
+bower_components/*/bower.json
+bower_components/*/package.json
+bower_components/bootstrap/fonts/
+bower_components/bootstrap/grunt/
+bower_components/bootstrap/js/
+bower_components/bootstrap/less/
+bower_components/jquery/src/
+bower_components/rickshaw/examples/
+bower_components/rickshaw/src/
+bower_components/rickshaw/tests/
+bower_components/rickshaw/tutorial/
+bower_components/rickshaw/vendor/

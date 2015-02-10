@@ -35,23 +35,31 @@ angular.module('angular-rickshaw', [])
                 },
                 // replace: true,
                 link: function(scope, element, attrs) {
-                    function getSettings(el) {
-                        var settings = angular.copy(scope.options);
-                        settings.element = el;
-                        settings.series = scope.series;
-                        return settings;
-                    }
-
+					var graphEl;
                     var graph;
+					var settings;
 
                     function update() {
-                        var mainEl = angular.element(element);
-                        mainEl.append(graphEl);
-                        mainEl.empty();
-                        var graphEl = $compile('<div></div>')(scope);
-                        mainEl.append(graphEl);
-                        var settings = getSettings(graphEl[0]);
-                        graph = new Rickshaw.Graph(settings);
+						if (!graph) {
+							var mainEl = angular.element(element);
+							mainEl.append(graphEl);
+							mainEl.empty();
+							graphEl = $compile('<div></div>')(scope);
+							mainEl.append(graphEl);
+
+							settings = angular.copy(scope.options);
+							settings.element = graphEl[0];
+							settings.series = scope.series;
+
+							graph = new Rickshaw.Graph(settings);
+						}
+						else {
+							settings = angular.copy(scope.options, settings);
+							settings.element = graphEl[0];
+							settings.series = scope.series;
+
+							graph.configure(settings);
+						}
 
                         if (scope.features && scope.features.hover) {
                             var hoverConfig = {
@@ -121,7 +129,7 @@ angular.module('angular-rickshaw', [])
                         if (!angular.equals(newValue, oldValue)) {
                             update();
                         }
-                    });
+                    }, true);
                     var seriesWatch = scope.$watch(function(scope) {
 						if (scope.features && scope.features.directive && scope.features.directive.watchAllSeries) {
 							var watches = {};
@@ -142,7 +150,7 @@ angular.module('angular-rickshaw', [])
                         if (!angular.equals(newValue, oldValue)) {
                             update();
                         }
-                    });
+                    }, true);
 
 					scope.$on('$destroy', function() {
 						optionsWatch();
