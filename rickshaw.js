@@ -25,7 +25,7 @@
 /* global Rickshaw */
 
 angular.module('angular-rickshaw', [])
-        .directive('rickshaw', function($compile) {
+        .directive('rickshaw', function($compile, $window) {
             return {
                 restrict: 'EA',
                 scope: {
@@ -35,13 +35,14 @@ angular.module('angular-rickshaw', [])
                 },
                 // replace: true,
                 link: function(scope, element, attrs) {
+					var mainEl;
 					var graphEl;
                     var graph;
 					var settings;
 
                     function update() {
 						if (!graph) {
-							var mainEl = angular.element(element);
+							mainEl = angular.element(element);
 							mainEl.append(graphEl);
 							mainEl.empty();
 							graphEl = $compile('<div></div>')(scope);
@@ -77,6 +78,7 @@ angular.module('angular-rickshaw', [])
                             }
                         }
 
+						graph.setSize();
                         graph.render();
 
                         if (scope.features && scope.features.xAxis) {
@@ -156,6 +158,14 @@ angular.module('angular-rickshaw', [])
 						optionsWatch();
 						seriesWatch();
 						featuresWatch();
+					});
+
+					angular.element($window).on('resize', function() {
+						scope.$broadcast('rickshaw::resize');
+					});
+					
+					scope.$on('rickshaw::resize', function() {
+						update();
 					});
 					
                     update();
