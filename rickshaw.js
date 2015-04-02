@@ -40,6 +40,11 @@ angular.module('angular-rickshaw', [])
                     var graph;
                     var settings;
 
+                    function redraw() {
+                        graph.setSize();
+                        graph.render();
+                    }
+
                     function update() {
                         if (!graph) {
                             mainEl = angular.element(element);
@@ -78,8 +83,7 @@ angular.module('angular-rickshaw', [])
                             }
                         }
 
-                        graph.setSize();
-                        graph.render();
+                        redraw();
 
                         if (scope.features && scope.features.xAxis) {
                             var xAxisConfig = {
@@ -165,7 +169,7 @@ angular.module('angular-rickshaw', [])
                     });
                     
                     scope.$on('rickshaw::resize', function() {
-                        update();
+                        redraw();
                     });
                     
                     update();
