@@ -25,7 +25,7 @@
 /* global Rickshaw */
 
 angular.module('angular-rickshaw', [])
-        .directive('rickshaw', function($compile, $window) {
+        .directive('rickshaw', ['$compile', '$window', function($compile, $window) {
             return {
                 restrict: 'EA',
                 scope: {
@@ -173,4 +173,4 @@ angular.module('angular-rickshaw', [])
                 controller: function($scope, $element, $attrs) {
                 }
             };
-        });
+        }]);
