@@ -38,6 +38,8 @@ angular.module('angular-rickshaw', [])
                     var mainEl;
                     var graphEl;
                     var legendEl;
+                    var xAxis;
+                    var yAxis;
                     var graph;
                     var settings;
 
@@ -94,16 +96,29 @@ angular.module('angular-rickshaw', [])
                                 var xAxisConfig = {
                                     graph: graph
                                 };
-                                var xAxis;
                                 if (scope.features.xAxis.timeUnit) {
                                     var time = new Rickshaw.Fixtures.Time();
                                     xAxisConfig.timeUnit = time.unit(scope.features.xAxis.timeUnit);
-                                    xAxis = new Rickshaw.Graph.Axis.Time(xAxisConfig);
+                                    if (!xAxis) {
+                                        xAxis = new Rickshaw.Graph.Axis.Time(xAxisConfig);
+                                        xAxis.render();
+                                    }
+                                    else {
+                                        // Update xAxis if Rickshaw allows it in future.
+                                    }
                                 }
                                 else {
-                                    xAxis = new Rickshaw.Graph.Axis.X(xAxisConfig);
+                                    if (!xAxis) {
+                                        xAxis = new Rickshaw.Graph.Axis.X(xAxisConfig);
+                                        xAxis.render();
+                                    }
+                                    else {
+                                        // Update xAxis if Rickshaw allows it in future.
+                                    }
                                 }
-                                xAxis.render();
+                            }
+                            else {
+                                // Remove xAxis if Rickshaw allows it in future.
                             }
 
                             if (scope.features.yAxis) {
@@ -113,9 +128,16 @@ angular.module('angular-rickshaw', [])
                                 if (scope.features.yAxis.tickFormat) {
                                     yAxisConfig.tickFormat = Rickshaw.Fixtures.Number[scope.features.yAxis.tickFormat];
                                 }
-
-                                var yAxis = new Rickshaw.Graph.Axis.Y(yAxisConfig);
-                                yAxis.render();
+                                if (!yAxis) {
+                                    yAxis = new Rickshaw.Graph.Axis.Y(yAxisConfig);
+                                    yAxis.render();
+                                }
+                                else {
+                                    // Update yAxis if Rickshaw allows it in future.
+                                }
+                            }
+                            else {
+                                // Remove yAxis if Rickshaw allows it in future.
                             }
 
                             if (scope.features.legend) {

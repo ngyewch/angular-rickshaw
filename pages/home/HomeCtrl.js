@@ -26,6 +26,28 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
             'classic9',
             'munin'
         ];
+        $scope.xAxes = [
+            'none',
+            'numeric',
+            'decade',
+            'year',
+            'month',
+            'week',
+            'day',
+            '6 hour',
+            'hour',
+            '15 minute',
+            'minute',
+            '15 second',
+            'second',
+            'decisecond',
+            'centisecond'
+        ];
+        $scope.yAxes = [
+            'none',
+            'formatKMBT',
+            'formatBase1024KMGTP'
+        ];
 
         $scope.rendererChanged = function(id) {
             if (!$scope['options' + id]) {
@@ -54,7 +76,51 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
             else {
                 delete $scope['features' + id].legend;
             }
-        }
+        };
+        
+        $scope.xAxisChanged = function(id) {
+            if (!$scope['features' + id]) {
+                $scope['features' + id] = {};
+            }
+            var xAxis = $scope['xAxis' + id];
+            if (xAxis) {
+                if (xAxis === 'none') {
+                    delete $scope['features' + id].xAxis;
+                }
+                else if (xAxis === 'numeric') {
+                    $scope['features' + id].xAxis = {
+                    };
+                }
+                else {
+                    $scope['features' + id].xAxis = {
+                        timeUnit: xAxis
+                    };
+                }
+            }
+            else {
+                delete $scope['features' + id].xAxis;
+            }
+        };
+
+        $scope.yAxisChanged = function(id) {
+            if (!$scope['features' + id]) {
+                $scope['features' + id] = {};
+            }
+            var yAxis = $scope['yAxis' + id];
+            if (yAxis) {
+                if (yAxis === 'none') {
+                    delete $scope['features' + id].yAxis;
+                }
+                else {
+                    $scope['features' + id].yAxis = {
+                        tickFormat: yAxis
+                    };
+                }
+            }
+            else {
+                delete $scope['features' + id].xAxis;
+            }
+        };
 
         $scope.changeSeriesData = function(id) {
             var seriesList = [];
@@ -182,6 +248,8 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         };
         $scope.renderer0 = $scope.renderers[0];
         $scope.palette0 = $scope.palettes[0];
+        $scope.xAxis0 = 'none';
+        $scope.yAxis0 = 'none';
 
         $scope.rendererChanged(0);
         $scope.paletteChanged(0);

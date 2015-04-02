@@ -274,6 +274,14 @@
                     <label>Palette</label>
                     <select class="form-control" ng-model="palette0" ng-options="palette for palette in palettes" ng-change="paletteChanged(0)"></select>
                 </div>
+                <div class="form-group">
+                    <label>X axis*</label>
+                    <select class="form-control" ng-model="xAxis0" ng-options="xAxis for xAxis in xAxes" ng-change="xAxisChanged(0)"></select>
+                </div>
+                <div class="form-group">
+                    <label>Y axis*</label>
+                    <select class="form-control" ng-model="yAxis0" ng-options="yAxis for yAxis in yAxes" ng-change="yAxisChanged(0)"></select>
+                </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" ng-model="legend0" ng-change="legendChanged(0)"> Legend
@@ -281,6 +289,7 @@
                 </div>
                 <button class="btn btn-primary" ng-click="changeSeriesData(0)">Change series data</button>
             </form>
+            <p>* Can only be set once.</p>
             <rickshaw rickshaw-options="options0" rickshaw-features="features0" rickshaw-series="series0"></rickshaw>
         </div>
     </div>
