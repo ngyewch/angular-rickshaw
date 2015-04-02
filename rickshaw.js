@@ -35,32 +35,32 @@ angular.module('angular-rickshaw', [])
                 },
                 // replace: true,
                 link: function(scope, element, attrs) {
-					var mainEl;
-					var graphEl;
+                    var mainEl;
+                    var graphEl;
                     var graph;
-					var settings;
+                    var settings;
 
                     function update() {
-						if (!graph) {
-							mainEl = angular.element(element);
-							mainEl.append(graphEl);
-							mainEl.empty();
-							graphEl = $compile('<div></div>')(scope);
-							mainEl.append(graphEl);
+                        if (!graph) {
+                            mainEl = angular.element(element);
+                            mainEl.append(graphEl);
+                            mainEl.empty();
+                            graphEl = $compile('<div></div>')(scope);
+                            mainEl.append(graphEl);
 
-							settings = angular.copy(scope.options);
-							settings.element = graphEl[0];
-							settings.series = scope.series;
+                            settings = angular.copy(scope.options);
+                            settings.element = graphEl[0];
+                            settings.series = scope.series;
 
-							graph = new Rickshaw.Graph(settings);
-						}
-						else {
-							settings = angular.copy(scope.options, settings);
-							settings.element = graphEl[0];
-							settings.series = scope.series;
+                            graph = new Rickshaw.Graph(settings);
+                        }
+                        else {
+                            settings = angular.copy(scope.options, settings);
+                            settings.element = graphEl[0];
+                            settings.series = scope.series;
 
-							graph.configure(settings);
-						}
+                            graph.configure(settings);
+                        }
 
                         if (scope.features && scope.features.hover) {
                             var hoverConfig = {
@@ -78,7 +78,7 @@ angular.module('angular-rickshaw', [])
                             }
                         }
 
-						graph.setSize();
+                        graph.setSize();
                         graph.render();
 
                         if (scope.features && scope.features.xAxis) {
@@ -133,16 +133,16 @@ angular.module('angular-rickshaw', [])
                         }
                     }, true);
                     var seriesWatch = scope.$watch(function(scope) {
-						if (scope.features && scope.features.directive && scope.features.directive.watchAllSeries) {
-							var watches = {};
-							for (var i = 0; i < scope.series.length; i++) {
-								watches['series' + i] = scope.series[i].data;
-							}
-							return watches;
-						}
-						else {
-							return scope.series[0].data;
-						}
+                        if (scope.features && scope.features.directive && scope.features.directive.watchAllSeries) {
+                            var watches = {};
+                            for (var i = 0; i < scope.series.length; i++) {
+                                watches['series' + i] = scope.series[i].data;
+                            }
+                            return watches;
+                        }
+                        else {
+                            return scope.series[0].data;
+                        }
                     }, function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
                             update();
@@ -154,20 +154,20 @@ angular.module('angular-rickshaw', [])
                         }
                     }, true);
 
-					scope.$on('$destroy', function() {
-						optionsWatch();
-						seriesWatch();
-						featuresWatch();
-					});
+                    scope.$on('$destroy', function() {
+                        optionsWatch();
+                        seriesWatch();
+                        featuresWatch();
+                    });
 
-					angular.element($window).on('resize', function() {
-						scope.$broadcast('rickshaw::resize');
-					});
-					
-					scope.$on('rickshaw::resize', function() {
-						update();
-					});
-					
+                    angular.element($window).on('resize', function() {
+                        scope.$broadcast('rickshaw::resize');
+                    });
+                    
+                    scope.$on('rickshaw::resize', function() {
+                        update();
+                    });
+                    
                     update();
                 },
                 controller: function($scope, $element, $attrs) {
