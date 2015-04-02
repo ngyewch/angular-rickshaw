@@ -37,6 +37,7 @@ angular.module('angular-rickshaw', [])
                 link: function(scope, element, attrs) {
                     var mainEl;
                     var graphEl;
+                    var legendEl;
                     var graph;
                     var settings;
 
@@ -67,66 +68,84 @@ angular.module('angular-rickshaw', [])
                             graph.configure(settings);
                         }
 
-                        if (scope.features && scope.features.hover) {
-                            var hoverConfig = {
-                                graph: graph
-                            };
-                            hoverConfig.xFormatter = scope.features.hover.xFormatter;
-                            hoverConfig.yFormatter = scope.features.hover.yFormatter;
-                            hoverConfig.formatter = scope.features.hover.formatter;
-                            var hoverDetail = new Rickshaw.Graph.HoverDetail(hoverConfig);
-                        }
-                        if (scope.features && scope.features.palette) {
-                            var palette = new Rickshaw.Color.Palette({scheme: scope.features.palette});
-                            for (var i = 0; i < settings.series.length; i++) {
-                                settings.series[i].color = palette.color();
+                        if (scope.features) {
+                            if (scope.features.hover) {
+                                var hoverConfig = {
+                                    graph: graph
+                                };
+                                hoverConfig.xFormatter = scope.features.hover.xFormatter;
+                                hoverConfig.yFormatter = scope.features.hover.yFormatter;
+                                hoverConfig.formatter = scope.features.hover.formatter;
+                                var hoverDetail = new Rickshaw.Graph.HoverDetail(hoverConfig);
+                            }
+
+                            if (scope.features.palette) {
+                                var palette = new Rickshaw.Color.Palette({scheme: scope.features.palette});
+                                for (var i = 0; i < settings.series.length; i++) {
+                                    settings.series[i].color = palette.color();
+                                }
                             }
                         }
 
                         redraw();
 
-                        if (scope.features && scope.features.xAxis) {
-                            var xAxisConfig = {
-                                graph: graph
-                            };
-                            if (scope.features.xAxis.timeUnit) {
-                                var time = new Rickshaw.Fixtures.Time();
-                                xAxisConfig.timeUnit = time.unit(scope.features.xAxis.timeUnit);
-                            }
-                            var xAxis = new Rickshaw.Graph.Axis.Time(xAxisConfig);
-                            xAxis.render();
-                        }
-                        if (scope.features && scope.features.yAxis) {
-                            var yAxisConfig = {
-                                graph: graph
-                            };
-                            if (scope.features.yAxis.tickFormat) {
-                                yAxisConfig.tickFormat = Rickshaw.Fixtures.Number[scope.features.yAxis.tickFormat];
+                        if (scope.features) {
+                            if (scope.features.xAxis) {
+                                var xAxisConfig = {
+                                    graph: graph
+                                };
+                                var xAxis;
+                                if (scope.features.xAxis.timeUnit) {
+                                    var time = new Rickshaw.Fixtures.Time();
+                                    xAxisConfig.timeUnit = time.unit(scope.features.xAxis.timeUnit);
+                                    xAxis = new Rickshaw.Graph.Axis.Time(xAxisConfig);
+                                }
+                                else {
+                                    xAxis = new Rickshaw.Graph.Axis.X(xAxisConfig);
+                                }
+                                xAxis.render();
                             }
 
-                            var yAxis = new Rickshaw.Graph.Axis.Y(yAxisConfig);
-                            yAxis.render();
-                        }
+                            if (scope.features.yAxis) {
+                                var yAxisConfig = {
+                                    graph: graph
+                                };
+                                if (scope.features.yAxis.tickFormat) {
+                                    yAxisConfig.tickFormat = Rickshaw.Fixtures.Number[scope.features.yAxis.tickFormat];
+                                }
 
-                        if (scope.features && scope.features.legend) {
-                            var legendEl = $compile('<div></div>')(scope);
-                            mainEl.append(legendEl);
-
-                            var legend = new Rickshaw.Graph.Legend({
-                                graph: graph,
-                                element: legendEl[0]
-                            });
-                            if (scope.features.legend.toggle) {
-                                var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
-                                    graph: graph,
-                                    legend: legend
-                                });
+                                var yAxis = new Rickshaw.Graph.Axis.Y(yAxisConfig);
+                                yAxis.render();
                             }
-                            if (scope.features.legend.highlight) {
-                                var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
-                                    graph: graph,
-                                    legend: legend
-                                });
+
+                            if (scope.features.legend) {
+                                if (!legendEl) {
+                                    legendEl = $compile('<div></div>')(scope);
+                                    mainEl.append(legendEl);
+
+                                    var legend = new Rickshaw.Graph.Legend({
+                                        graph: graph,
+                                        element: legendEl[0]
+                                    });
+                                    if (scope.features.legend.toggle) {
+                                        var shelving = new Rickshaw.Graph.Behavior.Series.Toggle({
+                                            graph: graph,
+                                            legend: legend
+                                        });
+                                    }
+                                    if (scope.features.legend.highlight) {
+                                        var highlighter = new Rickshaw.Graph.Behavior.Series.Highlight({
+                                            graph: graph,
+                                            legend: legend
+                                        });
+                                    }
+                                }
+                            }
+                            else {
+                                if (legendEl) {
+                                    legendEl.remove();
+                                    legendEl = null;
+                                }
                             }
                         }
                     }

@@ -260,17 +260,28 @@
         </tab>
     </tabset>
 
-    <h3>Demo</h3>
+    <h3>Interactive demo</h3>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Demo Rickshaw graph</div>
+        <div class="panel-heading">Interactive Rickshaw graph</div>
         <div class="panel-body">
-            <rickshaw rickshaw-options="options0" rickshaw-features="features0" rickshaw-series="series0"></rickshaw>
             <form class="form-inline">
-                <select class="form-control" ng-model="renderer0" ng-options="renderer.name for renderer in renderers" ng-change="rendererChanged(0)"></select>
-                <select class="form-control" ng-model="palette0" ng-options="palette for palette in palettes" ng-change="paletteChanged(0)"></select>
+                <div class="form-group">
+                    <label>Renderer</label>
+                    <select class="form-control" ng-model="renderer0" ng-options="renderer.name for renderer in renderers" ng-change="rendererChanged(0)"></select>
+                </div>
+                <div class="form-group">
+                    <label>Palette</label>
+                    <select class="form-control" ng-model="palette0" ng-options="palette for palette in palettes" ng-change="paletteChanged(0)"></select>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="legend0" ng-change="legendChanged(0)"> Legend
+                    </label>
+                </div>
                 <button class="btn btn-primary" ng-click="changeSeriesData(0)">Change series data</button>
             </form>
+            <rickshaw rickshaw-options="options0" rickshaw-features="features0" rickshaw-series="series0"></rickshaw>
         </div>
     </div>
 

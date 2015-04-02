@@ -28,16 +28,33 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         ];
 
         $scope.rendererChanged = function(id) {
-            $scope['options' + id] = {
-                renderer: $scope['renderer' + id].id
-            };
+            if (!$scope['options' + id]) {
+                $scope['options' + id] = {};
+            }
+            $scope['options' + id].renderer = $scope['renderer' + id].id;
         };
 
         $scope.paletteChanged = function(id) {
-            $scope['features' + id] = {
-                palette: $scope['palette' + id]
-            };
+            if (!$scope['features' + id]) {
+                $scope['features' + id] = {};
+            }
+            $scope['features' + id].palette = $scope['palette' + id];
         };
+        
+        $scope.legendChanged = function(id) {
+            if (!$scope['features' + id]) {
+                $scope['features' + id] = {};
+            }
+            if ($scope['legend' + id]) {
+                $scope['features' + id].legend = {
+                    toggle: true,
+                    highlight: true
+                };
+            }
+            else {
+                delete $scope['features' + id].legend;
+            }
+        }
 
         $scope.changeSeriesData = function(id) {
             var seriesList = [];
