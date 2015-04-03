@@ -100,6 +100,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
             else {
                 delete $scope['features' + id].xAxis;
             }
+            $scope['xAxisDisabled' + id] = true;
         };
 
         $scope.yAxisChanged = function(id) {
@@ -120,6 +121,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
             else {
                 delete $scope['features' + id].xAxis;
             }
+            $scope['yAxisDisabled' + id] = true;
         };
 
         $scope.changeSeriesData = function(id) {
@@ -130,12 +132,11 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
                     data: []
                 };
                 for (var j = 0; j < 10; j++) {
-                    series.data.push({x: j, y: Math.random() * 20});
+                    series.data.push({x: j * 900, y: Math.random() * 10000});
                 }
                 seriesList.push(series);
-                $scope['series' + id][i] = series;
             }
-            //$scope['series' + id] = seriesList;
+            $scope['series' + id] = seriesList;
         };
 
         $scope.options1 = {
@@ -250,6 +251,8 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         $scope.palette0 = $scope.palettes[0];
         $scope.xAxis0 = 'none';
         $scope.yAxis0 = 'none';
+        $scope.xAxisDisabled0 = false;
+        $scope.yAxisDisabled0 = false;
 
         $scope.rendererChanged(0);
         $scope.paletteChanged(0);

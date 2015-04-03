@@ -276,11 +276,11 @@
                 </div>
                 <div class="form-group">
                     <label>X axis*</label>
-                    <select class="form-control" ng-model="xAxis0" ng-options="xAxis for xAxis in xAxes" ng-change="xAxisChanged(0)"></select>
+                    <select class="form-control" ng-model="xAxis0" ng-options="xAxis for xAxis in xAxes" ng-change="xAxisChanged(0)" ng-disabled="xAxisDisabled0"></select>
                 </div>
                 <div class="form-group">
                     <label>Y axis*</label>
-                    <select class="form-control" ng-model="yAxis0" ng-options="yAxis for yAxis in yAxes" ng-change="yAxisChanged(0)"></select>
+                    <select class="form-control" ng-model="yAxis0" ng-options="yAxis for yAxis in yAxes" ng-change="yAxisChanged(0)" ng-disabled="yAxisDisabled0"></select>
                 </div>
                 <div class="checkbox">
                     <label>
