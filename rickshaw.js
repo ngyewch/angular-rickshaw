@@ -48,7 +48,45 @@ angular.module('angular-rickshaw', [])
                         graph.render();
                     }
 
-                    function update() {
+                    function _splice(args) {
+                        var data = args.data;
+                        var series = args.series;
+
+                        if (!args.series) {
+                            return data;
+                        }
+
+                        series.forEach(function(s) {
+                            var seriesKey = s.key || s.name;
+                            if (!seriesKey) {
+                                throw "series needs a key or a name";
+                            }
+
+                            data.forEach(function(d) {
+                                var dataKey = d.key || d.name;
+                                if (!dataKey) {
+                                    throw "data needs a key or a name";
+                                }
+                                if (seriesKey == dataKey) {
+                                    var properties = ['color', 'name', 'data'];
+                                    properties.forEach(function(p) {
+                                        if (d[p]) {
+                                            s[p] = d[p];
+                                        }
+                                    });
+                                }
+                            } );
+                        });
+                    }
+
+                    function updateData() {
+                        if (graph && settings) {
+                            _splice({ data: scope.series, series: settings.series });
+                            redraw();
+                        }
+                    }
+
+                    function updateConfiguration() {
                         if (!graph) {
                             mainEl = angular.element(element);
                             mainEl.append(graphEl);
@@ -63,9 +101,13 @@ angular.module('angular-rickshaw', [])
                             graph = new Rickshaw.Graph(settings);
                         }
                         else {
-                            settings = angular.copy(scope.options, settings);
-                            settings.element = graphEl[0];
-                            settings.series = scope.series;
+                            if (scope.options) {
+                                for (var key in scope.options) {
+                                    settings[key] = scope.options[key];
+                                    console.log(key + '=' + scope.options[key]);
+                                }
+                                settings.element = graphEl[0];
+                            }
 
                             graph.configure(settings);
                         }
@@ -174,28 +216,17 @@ angular.module('angular-rickshaw', [])
 
                     var optionsWatch = scope.$watch('options', function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
-                            update();
+                            updateConfiguration();
                         }
                     }, true);
-                    var seriesWatch = scope.$watch(function(scope) {
-                        if (scope.features && scope.features.directive && scope.features.directive.watchAllSeries) {
-                            var watches = {};
-                            for (var i = 0; i < scope.series.length; i++) {
-                                watches['series' + i] = scope.series[i].data;
-                            }
-                            return watches;
-                        }
-                        else {
-                            return scope.series[0].data;
-                        }
-                    }, function(newValue, oldValue) {
+                    var seriesWatch = scope.$watchCollection('series', function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
-                            update();
+                            updateData();
                         }
                     }, true);
                     var featuresWatch = scope.$watch('features', function(newValue, oldValue) {
                         if (!angular.equals(newValue, oldValue)) {
-                            update();
+                            updateConfiguration();
                         }
                     }, true);
 
@@ -213,7 +244,7 @@ angular.module('angular-rickshaw', [])
                         redraw();
                     });
                     
-                    update();
+                    updateConfiguration();
                 },
                 controller: function($scope, $element, $attrs) {
                 }
