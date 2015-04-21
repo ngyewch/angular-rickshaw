@@ -3,7 +3,7 @@
 
 'use strict';
 
-angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
+angular.module('myApp').controller('HomeCtrl', ['$scope', '$interval', function($scope, $interval) {
         $scope.renderers = [{
                 id: 'area',
                 name: 'Area'
@@ -257,4 +257,51 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         $scope.rendererChanged(0);
         $scope.paletteChanged(0);
         $scope.changeSeriesData(0);
+
+        $scope.options100 = {
+            renderer: 'line'
+        };
+        $scope.features100 = {
+            xAxis: {
+            },
+            yAxis: {
+                tickFormat: 'formatKMBT'
+            }
+        };
+        $scope.series100 = [{
+                name: 'Series 1',
+                color: 'steelblue',
+                data: []
+            }, {
+                name: 'Series 2',
+                color: 'lightblue',
+                data: []
+            }];
+        $scope.x100 = 0;
+
+        $scope.toggleRandomSeries = function(id) {
+            $scope['random' + id] = !$scope['random' + id];
+            if ($scope['random' + id]) {
+                $scope['interval' + id] = $interval(function() {
+                    var x = $scope['x' + id];
+                    var series = $scope['series' + id];
+                    for (var i = 0; i < series.length; i++) {
+                        var name = series[i].name;
+                        var color = series[i].color;
+                        var data = series[i].data;
+                        data.push({x: x, y: Math.random() * 10000});
+                        series[i] = {
+                            name: name,
+                            color: color,
+                            data: data
+                        };
+                    }
+                    x++;
+                    $scope['x' + id] = x;
+                }, 1000);
+            }
+            else {
+                $interval.cancel($scope['interval' + id]);
+            }
+        };
     }]);

@@ -294,4 +294,19 @@
         </div>
     </div>
 
+    <h3>Real-time demo</h3>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Real-time Rickshaw graph</div>
+        <div class="panel-body">
+            <form class="form-inline">
+                <button class="btn btn-primary" ng-click="toggleRandomSeries(100)">
+                    <span ng-if="!random100">Start</span>
+                    <span ng-if="random100">Stop</span>
+                </button>
+            </form>
+            <rickshaw rickshaw-options="options100" rickshaw-features="features100" rickshaw-series="series100"></rickshaw>
+        </div>
+    </div>
+
 </div>
