@@ -246,7 +246,7 @@ angular.module('angular-rickshaw', [])
                     
                     updateConfiguration();
                 },
-                controller: function($scope, $element, $attrs) {
-                }
+                controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
+                }]
             };
         }]);
