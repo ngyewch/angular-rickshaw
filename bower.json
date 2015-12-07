@@ -17,8 +17,8 @@
   ],
   "dependencies": {
     "angular": "^1.4.0",
-    "rickshaw": "~1.5.1",
-    "d3": "~3.5.5"
+    "d3": "~3.5.5",
+    "rickshaw": "~1.5.1"
   },
   "devDependencies": {}
 }
