@@ -165,7 +165,12 @@ angular.module('angular-rickshaw', [])
                                     graph: graph
                                 };
                                 if (scope.features.yAxis.tickFormat) {
-                                    yAxisConfig.tickFormat = Rickshaw.Fixtures.Number[scope.features.yAxis.tickFormat];
+                                    var tickFormat = scope.features.yAxis.tickFormat;
+                                    if (typeof tickFormat === 'string'){
+                                        yAxisConfig.tickFormat = Rickshaw.Fixtures.Number[tickFormat];
+                                    } else {
+                                        yAxisConfig.tickFormat = tickFormat;
+                                    }
                                 }
                                 if (!yAxis) {
                                     yAxis = new Rickshaw.Graph.Axis.Y(yAxisConfig);
