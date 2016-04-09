@@ -38,6 +38,7 @@ angular.module('angular-rickshaw', [])
                     var mainEl;
                     var graphEl;
                     var legendEl;
+                    var previewEl;
                     var xAxis;
                     var yAxis;
                     var graph;
@@ -211,6 +212,24 @@ angular.module('angular-rickshaw', [])
                                 if (legendEl) {
                                     legendEl.remove();
                                     legendEl = null;
+                                }
+                            }
+
+                            if (scope.features.preview) {
+                                if (!previewEl) {
+                                    previewEl = $compile('<div></div>')(scope);
+                                    mainEl.append(previewEl);
+
+                                    new Rickshaw.Graph.RangeSlider.Preview({
+                                        graph: graph,
+                                        element: previewEl[0]
+                                    });
+                                }
+                            }
+                            else {
+                                if (previewEl) {
+                                    previewEl.remove();
+                                    previewEl = null;
                                 }
                             }
                         }
