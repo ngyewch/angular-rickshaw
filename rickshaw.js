@@ -135,21 +135,29 @@ angular.module('angular-rickshaw', [])
 
                         if (scope.features) {
                             if (scope.features.xAxis) {
-                                var xAxisConfig = {
-                                    graph: graph
-                                };
-                                if (scope.features.xAxis.timeUnit) {
-                                    var time = new Rickshaw.Fixtures.Time();
-                                    xAxisConfig.timeUnit = time.unit(scope.features.xAxis.timeUnit);
-                                }
-                                if (scope.features.xAxis.tickFormat) {
-                                    xAxisConfig.tickFormat = scope.features.xAxis.tickFormat;
-                                }
-                                if (scope.features.xAxis.ticksTreatment) {
-                                    xAxisConfig.ticksTreatment = scope.features.xAxis.ticksTreatment;
-                                }
                                 if (!xAxis) {
-                                    xAxis = new Rickshaw.Graph.Axis.X(xAxisConfig);
+                                    var xAxisConfig = {
+                                        graph: graph
+                                    };
+                                    if (scope.features.xAxis.timeUnit) {
+                                        var time = new Rickshaw.Fixtures.Time();
+                                        xAxisConfig.timeUnit = time.unit(scope.features.xAxis.timeUnit);
+                                    }
+                                    if (scope.features.xAxis.tickFormat) {
+                                        xAxisConfig.tickFormat = scope.features.xAxis.tickFormat;
+                                    }
+                                    if (scope.features.xAxis.ticksTreatment) {
+                                        xAxisConfig.ticksTreatment = scope.features.xAxis.ticksTreatment;
+                                    }
+                                    if (scope.features.xAxis.time) {
+                                        if (scope.features.xAxis.time.local) {
+                                            xAxisConfig.timeFixture = new Rickshaw.Fixtures.Time.Local();
+                                        }
+                                        xAxis = new Rickshaw.Graph.Axis.Time(xAxisConfig);
+                                    }
+                                    else {
+                                        xAxis = new Rickshaw.Graph.Axis.X(xAxisConfig);
+                                    }
                                     xAxis.render();
                                 }
                                 else {
@@ -241,11 +249,11 @@ angular.module('angular-rickshaw', [])
                     angular.element($window).on('resize', function() {
                         scope.$broadcast('rickshaw::resize');
                     });
-                    
+
                     scope.$on('rickshaw::resize', function() {
                         redraw();
                     });
-                    
+
                     updateConfiguration();
                 },
                 controller: ['$scope', '$element', '$attrs', function($scope, $element, $attrs) {
