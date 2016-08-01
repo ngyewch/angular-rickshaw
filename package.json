@@ -1,0 +1,39 @@
+{
+  "name": "angular-rickshaw",
+  "version": "0.1.1",
+  "description": "AngularJS Rickshaw directive.",
+  "contributors": [
+    {
+      "name": "Nick Ng",
+      "email": "ngyewch@gmail.com"
+    },
+    {
+      "name": "Pablo Reyes",
+      "email": "pablo@reyesoft.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ngyewch/angular-rickshaw"
+  },
+  "bugs": {
+    "url": "https://github.com/ngyewch/angular-rickshaw/issues"
+  },
+  "main": "rickshaw.js",
+  "files": [
+    "rickshaw.js",
+    "LICENSE",
+    "README.md",
+    "package.json"
+  ],
+  "keywords": [
+    "rickshaw",
+    "d3",
+    "graphis"
+  ],
+  "license": "Apache",
+  "dependencies": {
+    "rickshaw": "^1.5.1"
+  },
+  "devDependencies": {}
+}
